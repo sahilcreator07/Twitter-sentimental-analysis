@@ -63,36 +63,3 @@ Test Accuracy: 77.8%
 Sentiment Distribution
 Below is a visualization of sentiment distribution within the dataset:
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-sns.countplot(data=twitter_data, x='target')
-plt.title('Sentiment Distribution')
-plt.xlabel('Sentiment (0: Negative, 1: Positive)')
-plt.ylabel('Count')
-plt.show()
-Model Accuracy
-Dataset	Accuracy
-Training	79.8%
-Test	77.8%
-Usage
-Clone the repository or run the notebook on Google Colab.
-Ensure the dataset is extracted into your working directory.
-Train the model by running:
-model.fit(X_train, Y_train)
-Test the model:
-X_test_prediction = model.predict(X_test)
-accuracy = accuracy_score(Y_test, X_test_prediction)
-print(f'Accuracy Score on Test Data: {accuracy}')
-Save the trained model:
-import pickle
-
-with open('sentiment_model.pkl', 'wb') as file:
-    pickle.dump(model, file)
-References
-Sentiment140 Dataset on Kaggle
-Scikit-learn Documentation
-NLTK Documentation
-License
-This project is for educational purposes only. Please refer to the dataset’s license on Kaggle for more information.
-
