@@ -2,23 +2,97 @@
 
 dataset link :- https://www.kaggle.com/datasets/kazanova/sentiment140
 
-about dataset:
+Twitter Sentiment Analysis
+This project focuses on sentiment analysis using the Sentiment140 dataset. The goal is to build a logistic regression model to classify tweets as positive or negative based on the sentiment expressed in the text. The project involves data preprocessing, feature extraction, model training, and evaluation.
 
-Context
-This is the sentiment140 dataset. It contains 1,600,000 tweets extracted using the twitter api . The tweets have been annotated (0 = negative, 4 = positive) and they can be used to detect sentiment .
+Table of Contents
+Dataset
+Installation
+Project Workflow
+Results
+Model Accuracy
+Usage
+References
+Dataset
+Sentiment140 dataset with 1.6 million tweets
+Dataset Link
 
-Content
-It contains the following 6 fields:
+About the Dataset:
+Context:
+This dataset contains 1,600,000 tweets extracted using the Twitter API. It has been annotated for sentiment detection with the following labels:
+0 = Negative
+4 = Positive
+Content and Fields:
+target: Polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)
+ids: Tweet ID (e.g., 2087)
+date: Date and time of the tweet (e.g., Sat May 16 23:58:44 UTC 2009)
+flag: The query used to extract the tweet (e.g., "lyx"). If there’s no query, it is NO_QUERY.
+user: Username of the person who tweeted (e.g., robotickilldozr)
+text: The actual content of the tweet (e.g., "Lyx is cool")
+Installation
+Requirements
+Make sure you have the following libraries installed:
 
-target: the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)
+pip install pandas numpy scikit-learn matplotlib seaborn wordcloud nltk pickle-mixin
+You also need to download the Sentiment140 dataset from Kaggle:
 
-ids: The id of the tweet ( 2087)
+!kaggle datasets download -d kazanova/sentiment140
+Project Workflow
+Data Loading and Preprocessing:
 
-date: the date of the tweet (Sat May 16 23:58:44 UTC 2009)
+Extract the data from the ZIP file.
+Assign proper column names to the dataset.
+Replace positive labels from 4 to 1 and drop neutral tweets (2) to simplify the problem as binary classification.
+Clean the text: Remove stopwords, special characters, URLs, and numbers.
+Apply stemming to reduce words to their root form.
+Feature Extraction:
 
-flag: The query (lyx). If there is no query, then this value is NO_QUERY.
+Use TF-IDF Vectorizer to convert the text into numerical features.
+Train-Test Split:
 
-user: the user that tweeted (robotickilldozr)
+Split the dataset into 80% training and 20% test sets.
+Model Building:
 
-text: the text of the tweet (Lyx is cool)
+Train a Logistic Regression model using the training data.
+Evaluation:
+
+Evaluate the model’s performance on both training and test datasets using accuracy scores.
+Results
+Training Accuracy: 79.8%
+Test Accuracy: 77.8%
+Sentiment Distribution
+Below is a visualization of sentiment distribution within the dataset:
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.countplot(data=twitter_data, x='target')
+plt.title('Sentiment Distribution')
+plt.xlabel('Sentiment (0: Negative, 1: Positive)')
+plt.ylabel('Count')
+plt.show()
+Model Accuracy
+Dataset	Accuracy
+Training	79.8%
+Test	77.8%
+Usage
+Clone the repository or run the notebook on Google Colab.
+Ensure the dataset is extracted into your working directory.
+Train the model by running:
+model.fit(X_train, Y_train)
+Test the model:
+X_test_prediction = model.predict(X_test)
+accuracy = accuracy_score(Y_test, X_test_prediction)
+print(f'Accuracy Score on Test Data: {accuracy}')
+Save the trained model:
+import pickle
+
+with open('sentiment_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
+References
+Sentiment140 Dataset on Kaggle
+Scikit-learn Documentation
+NLTK Documentation
+License
+This project is for educational purposes only. Please refer to the dataset’s license on Kaggle for more information.
 
